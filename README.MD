@@ -84,7 +84,7 @@ Users can register, log in, play quizzes across different levels, and track scor
 ### 1️⃣ Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/quizx.git
+git clone https://github.com/Savi118/Cognifyz-task-4
 cd quizx
 ```
 
