@@ -1,0 +1,35 @@
+<!-- quizx-icon.svg -->
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">QuizX Icon</title>
+  <desc id="desc">A gradient Q ring with an X inside, glowing cyan to violet.</desc>
+
+  <defs>
+    <!-- Cyan → Violet gradient -->
+    <linearGradient id="gx" x1="0" y1="0" x2="128" y2="128" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#22D3EE"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+
+    <!-- Soft glow filter -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background is transparent so it works on any site theme -->
+
+  <!-- Q ring -->
+  <circle cx="64" cy="64" r="36" stroke="url(#gx)" stroke-width="10" fill="none" filter="url(#glow)"/>
+  <!-- Q tail -->
+  <path d="M88 88 L100 100" stroke="url(#gx)" stroke-width="10" stroke-linecap="round" filter="url(#glow)"/>
+
+  <!-- X -->
+  <g stroke="url(#gx)" stroke-width="10" stroke-linecap="round" filter="url(#glow)">
+    <line x1="48" y1="48" x2="80" y2="80"/>
+    <line x1="80" y1="48" x2="48" y2="80"/>
+  </g>
+</svg>

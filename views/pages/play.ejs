@@ -1,0 +1,103 @@
+<%- include('../partials/head') %>
+
+        <body class="flex flex-col bg-slate-900 min-h-screen">
+                <%- include('../partials/navbar') %>
+                        <main class="grow flex items-center justify-center text-white px-6">
+
+                                <section id="play" class="text-center w-full space-y-6">
+                                        <% if(!user) { %>
+                                                <h2 class="text-4xl md:text-5xl font-extrabold drop-shadow-sm">Ready to
+                                                        play on <span class="text-cyan-400">Quiz</span><span
+                                                                class="text-purple-400">X</span> ?</h2>
+                                                <p class="text-lg md:text-xl text-slate-300">Login or create an account
+                                                        to challenge your brain 🧠⚡
+                                                </p>
+                                                <div class="flex gap-4 justify-center pt-4">
+                                                        <a href="/auth/signup"
+                                                                class="px-6 py-2 bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-semibold rounded-lg shadow-lg hover:shadow-cyan-500/30 transition-all">Register</a>
+                                                        <a href="/auth/login"
+                                                                class="px-6 py-2 bg-purple-500 hover:bg-purple-400 text-slate-900 font-semibold rounded-lg shadow-lg hover:shadow-purple-500/30 transition-all">Login</a>
+                                                </div>
+                                                <% } else {%>
+                                                        <% if(!level) { %>
+                                                                <div
+                                                                        class="max-w-md mx-auto text-center bg-slate-900/70 backdrop-blur-xl p-8 rounded-2xl border border-slate-800 shadow-xl space-y-6">
+                                                                        <h2
+                                                                                class="text-4xl font-extrabold tracking-wide mb-4">
+                                                                                Choose Difficulty 🎮</h2>
+                                                                        <form action="/play" method="POST"
+                                                                                class="space-y-5 text-left">
+                                                                                <label for="level"
+                                                                                        class="block text-slate-300 font-medium mb-1">Select
+                                                                                        Level</label>
+                                                                                <select name="level" id="level"
+                                                                                        class="w-full px-4 py-3 bg-slate-800/90 border border-slate-700 text-slate-200 rounded-lg focus:outline-none focus:ring focus:ring=cyan-500/50 transition">
+                                                                                        <option value="beginner">
+                                                                                                Beginner 🟢
+                                                                                        </option>
+                                                                                        <option value="intermediate">
+                                                                                                Intermediate 🟡
+                                                                                        </option>
+                                                                                        <option value="advanced">
+                                                                                                Advanced 🔥
+                                                                                        </option>
+                                                                                </select>
+                                                                                <button type="submit"
+                                                                                        class="w-full py-3 font-semibold bg-linear-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-slate-900 rounded-lg shadow-lg hover:shadow-purple-500/40 transition-all">Start
+                                                                                        Quiz
+                                                                                        🚀</button>
+                                                                        </form>
+                                                                </div>
+                                                                <% } else { %>
+
+                                                                        <div class="max-w-2xl mx-auto space-y-6 w-full">
+
+                                                                                <div class="text-center">
+                                                                                        <span
+                                                                                                class="px-4 py-2 text-sm font-semibold rounded-full bg-slate-800 border border-slate-700">
+                                                                                                🎮 Level: <span
+                                                                                                        class="text-cyan-400 capitalize">
+                                                                                                        <%= level %>
+                                                                                                </span>
+                                                                                        </span>
+                                                                                </div>
+
+
+                                                                                <div class="w-full">
+                                                                                        <div
+                                                                                                class="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
+                                                                                                <div id="timerBar"
+                                                                                                        class="h-full w-full bg-linear-to-r from-cyan-400 to-purple-500">
+                                                                                                </div>
+                                                                                        </div>
+                                                                                </div>
+
+
+                                                                                <div
+                                                                                        class="w-full bg-slate-900/70 backdrop-blur-xl p-8 rounded-2xl border border-slate-800 shadow-xl space-y-6">
+
+                                                                                        <h2 id="questionText"
+                                                                                                class="text-2xl font-bold tracking-wide">
+                                                                                                Loading question...
+                                                                                        </h2>
+
+
+                                                                                        <div id="options"
+                                                                                                class="grid grid-cols-1 gap-4">
+
+                                                                                        </div>
+
+                                                                                </div>
+                                                                        </div>
+                                                                        <% } %>
+
+                                                                                <% }%>
+
+                                </section>
+
+                        </main>
+                        <%- include('../partials/footer') %>
+                                <script src="../js/script.js"></script>
+        </body>
+
+        </html>

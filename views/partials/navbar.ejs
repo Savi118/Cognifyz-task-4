@@ -1,0 +1,67 @@
+<header class=" bg-slate-900/70 backdrop-blur-lg border-b border-slate-800 shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
+                <!-- Brand -->
+                <a href="/"
+                        class="text-3xl md:text-4xl font-extrabold text-cyan-400 hover:text-sky-400 transition-all duration-300">
+                        Quiz<span class="text-purple-400">X</span>
+                </a>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex space-x-8 text-slate-300 font-medium">
+                        <a href="/" class="hover:text-cyan-300 transition-colors">Home</a>
+                        <a href="/play" class="hover:text-cyan-300 transition-colors">Play</a>
+                        <a href="/results" class="hover:text-cyan-300 transition-colors">Results</a>
+                        <a href="/about" class="hover:text-cyan-300 transition-colors">About</a>
+
+                        <div class="space-x-3">
+                                <% if (user) { %>
+                                        <a href="/auth/logout"
+                                                class="px-6 py-2 bg-linear-to-r from-cyan-500 to-purple-500 text-black font-semibold rounded-lg shadow-lg hover:shadow-purple-500/30 transition-all">
+                                                Logout
+                                        </a>
+                                        <% } else { %>
+                                                <a href="/auth/signup"
+                                                        class="px-6 py-2 bg-linear-to-r from-cyan-500 to-purple-500 text-black font-semibold rounded-lg shadow-lg hover:shadow-purple-500/30 transition-all">
+                                                        Register
+                                                </a>
+                                                <a href="/auth/login"
+                                                        class="px-6 py-2 bg-linear-to-r from-cyan-500 to-purple-500 text-black font-semibold rounded-lg shadow-lg hover:shadow-purple-500/30 transition-all">
+                                                        Login
+                                                </a>
+                                                <% } %>
+                        </div>
+                </nav>
+
+                
+                <button id="menuBtn"
+                        class="md:hidden text-slate-300 hover:text-cyan-400 transition-all duration-300 text-2xl">
+                        ☰
+                </button>
+        </div>
+
+        
+        <nav id="mobileMenu"
+                class="hidden md:hidden absolute top-16 left-0 w-full bg-slate-900/95 backdrop-blur-md border-t border-slate-800 shadow-xl p-6 flex-col space-y-4 text-slate-300 z-40">
+                <a href="/" class="block text-center hover:text-cyan-300 transition">Home</a>
+                <a href="/play" class="block text-center hover:text-cyan-300 transition">Play</a>
+                <a href="/results" class="block text-center hover:text-cyan-300 transition">Results</a>
+                <a href="/about" class="block text-center hover:text-cyan-300 transition">About</a>
+
+                <% if (user) { %>
+                        <a href="/auth/logout"
+                                class="block w-full text-center px-6 py-2 bg-linear-to-r from-cyan-500 to-purple-500 text-black font-semibold rounded-lg shadow hover:shadow-purple-500/30 transition">
+                                Logout
+                        </a>
+                        <% } else { %>
+                                <a href="/auth/signup"
+                                        class="block w-full text-center px-6 py-2 bg-linear-to-r from-cyan-500 to-purple-500 text-black font-semibold rounded-lg shadow hover:shadow-purple-500/30 transition">
+                                        Register
+                                </a>
+                                <a href="/auth/login"
+                                        class="block w-full text-center px-6 py-2 bg-linear-to-r from-cyan-500 to-purple-500 text-black font-semibold rounded-lg shadow hover:shadow-purple-500/30 transition">
+                                        Login
+                                </a>
+                                <% } %>
+        </nav>
+</header>
+

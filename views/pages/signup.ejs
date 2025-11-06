@@ -1,0 +1,82 @@
+<%- include('../partials/head') %>
+
+        <body class="flex flex-col bg-slate-900 min-h-screen">
+                <%- include('../partials/navbar') %>
+                        <main class="grow flex items-center justify-center text-white px-6 lg:my-5">
+
+                                <section
+                                        class="text-center w-full max-w-md bg-slate-900/60 backdrop-blur-md p-8 rounded-2xl border border-slate-800 shadow-xl space-y-6">
+
+                                        <h2 class="text-4xl font-extrabold">
+                                                Create your account
+                                        </h2>
+                                        <p class="text-lg text-slate-300">Join <span
+                                                        class="text-cyan-400">Quiz</span><span
+                                                        class="text-purple-400">X</span> and start your challenge! 🧠⚡
+                                        </p>
+
+                                        <form action="/auth/signup" method="POST" class="space-y-5 text-left">
+
+                                                <div>
+                                                        <label class="block text-slate-300 mb-1" for="name">Full
+                                                                Name</label>
+                                                        <input type="text" name="name" id="name" required
+                                                                placeholder="John Smith"
+                                                                class="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 placeholder-slate-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/40 outline-none transition-all">
+                                                </div>
+                                                <div>
+                                                        <label class="block text-slate-300 mb-1"
+                                                                for="email">Email</label>
+                                                        <input type="email" name="email" id="email" required
+                                                                placeholder="you@example.com"
+                                                                class="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 placeholder-slate-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/40 outline-none transition-all">
+                                                </div>
+
+                                                <div>
+                                                        <label class="block text-slate-300 mb-1"
+                                                                for="password">Password</label>
+                                                        <input type="password" name="password" id="password" required
+                                                                placeholder="Enter your password" minlength="8"
+                                                                pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}"
+                                                                oninvalid="this.setCustomValidity('Must include uppercase, lowercase, number, and 8+ characters')"
+                                                                oninput="this.setCustomValidity('')"
+                                                                class="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 placeholder-slate-500 focus:border-purple-400 focus:ring-2 focus:ring-purple-400/40 outline-none transition-all">
+                                                        <small class="text-slate-400 text-xs">
+                                                                Must contain Uppercase, lowercase, number & 8+
+                                                                characters
+                                                        </small>
+                                                </div>
+
+
+                                                <div>
+                                                        <label class="block text-slate-300 mb-1"
+                                                                for="confirmPassword">Confirm Password</label>
+                                                        <input type="password" name="confirmPassword"
+                                                                id="confirmPassword" required
+                                                                placeholder="Re-enter your password"
+                                                                class="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 placeholder-slate-500 focus:border-purple-400 focus:ring-2 focus:ring-purple-400/40 outline-none transition-all">
+                                                </div>
+
+                                                <button type="submit"
+                                                        class="w-full py-3 font-semibold bg-linear-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-black rounded-lg shadow-lg hover:shadow-purple-500/30 transition-all">
+                                                        Sign Up
+                                                </button>
+
+                                        </form>
+
+                                        <p class="text-slate-400 text-sm pt-2">
+                                                Already have an account?
+                                                <a href="/auth/login"
+                                                        class="text-cyan-400 hover:text-cyan-300 underline">Login</a>
+                                        </p>
+
+                                </section>
+
+                        </main>
+                        <%- include('../partials/footer') %>
+                                <script src="../js/script.js"></script>
+
+
+        </body>
+
+        </html>

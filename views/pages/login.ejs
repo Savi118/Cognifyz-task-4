@@ -1,0 +1,51 @@
+<%- include('../partials/head') %>
+
+        <body class="flex flex-col bg-slate-900 min-h-screen">
+                <%- include('../partials/navbar') %>
+                        <main class="grow flex items-center justify-center text-white px-6 my-3">
+
+                                <section id="login"
+                                        class="text-center space-y-6 w-full md:w-md bg-slate-900/60 backdrop-blur-md p-8 rounded-2xl border border-slate-800 shadow-xl">
+                                        <h2 class="text-4xl font-extrabold">Welcome to <span
+                                                        class="text-cyan-400">Quiz</span><span
+                                                        class="text-purple-400">X</span></h2>
+                                        <p class="text-lg text-slate-300">Login to start the challenge 🧠⚡</p>
+                                        <form action="/auth/login" method="POST" class="space-y-5 text-left">
+                                                <div>
+                                                        <label for="email"
+                                                                class="block text-slate-300 mb-1">Email</label>
+                                                        <input type="email" name="email" id="email" required
+                                                                placeholder="your@example.com"
+                                                                class="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 placeholder-slate-500 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/40 outline-none transition-all">
+
+                                                </div>
+                                                <div>
+                                                        <label for="password"
+                                                                class="block text-slate-300 mb-1">Password</label>
+                                                        <input type="password" id="password" name="password" required
+                                                                pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}"
+                                                                minlength="8" placeholder="Enter your password"
+                                                                class="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 placeholder-slate-500 focus:border-purple-400 focus:ring-2 focus:ring-purple-400/40 outline-none transition-all">
+                                                </div>
+                                                <button type="submit"
+                                                        class="w-full py-3 font-semibold bg-linear-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-black rounded-lg shadow-lg hover:shadow-purple-500/30 transition-all">
+                                                        Login
+                                                </button>
+
+                                        </form>
+                                        <p class="text-slate-400 text-sm pt-2">
+                                                Don’t have an account?
+                                                <a href="/auth/signup"
+                                                        class="text-cyan-400 hover:text-cyan-300 underline">
+                                                        Register
+                                                </a>
+                                        </p>
+
+                                </section>
+
+                        </main>
+                        <%- include('../partials/footer') %>
+                                <script src="../js/script.js"></script>
+        </body>
+
+        </html>
