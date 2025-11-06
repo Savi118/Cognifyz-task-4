@@ -53,7 +53,7 @@
                                                                         <tbody>
                                                                                 <% results.forEach((r, i)=> { %>
                                                                                         <tr
-                                                                                                class="<%= r.name === user?.name ? 'bg-slate-800/80 border-l-4 border-cyan-400' : 'hover:bg-slate-800/70 transition' %>">
+                                                                                                class="<%= r.user === user?.name ? 'bg-slate-800/80 border-l-4 border-cyan-400' : 'hover:bg-slate-800/70 transition' %>">
 
                                                                                                 <td
                                                                                                         class="py-3 px-4 text-slate-200 font-semibold">
@@ -61,7 +61,7 @@
                                                                                                 </td>
                                                                                                 <td
                                                                                                         class="py-3 px-4 text-slate-100 font-medium">
-                                                                                                        <%= r.name %>
+                                                                                                        <%= r.user %>
                                                                                                 </td>
                                                                                                 <td
                                                                                                         class="py-3 px-4 capitalize text-cyan-400 font-semibold">

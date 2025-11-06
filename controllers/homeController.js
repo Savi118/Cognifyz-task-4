@@ -1,28 +1,5 @@
-const { name } = require("ejs");
-const fs = require("fs");
-const path = require("path");
-
-const filePath = path.join(__dirname, "../data/questions.json");
-const resultsFile = path.join(__dirname, "../data/results.json");
-
-function loadResults() {
-  if (!fs.existsSync(resultsFile)) return [];
-
-  const data = fs.readFileSync(resultsFile, "utf8").trim();
-  if (!data) return [];
-
-  try {
-    return JSON.parse(data);
-  } catch (err) {
-    console.error("❌ Corrupted results.json. Resetting file.");
-    fs.writeFileSync(resultsFile, "[]");
-    return [];
-  }
-}
-
-function saveResultsFile(data) {
-  fs.writeFileSync(resultsFile, JSON.stringify(data, null, 2));
-}
+const Question = require("../models/question");
+const Result = require("../models/results");
 
 exports.getHome = (req, res) => {
   res.render("pages/home", { pageTitle: "Home", ...res.locals });
@@ -31,11 +8,9 @@ exports.getHome = (req, res) => {
 exports.getPlay = (req, res) => {
   const level = req.query?.level || null;
   res.render("pages/play", {
-    ...res.locals,
     pageTitle: "Play",
     level,
   });
-  console.log("GET PLAY — user session:", req.session.user);
 };
 
 exports.handleLevel = (req, res) => {
@@ -43,45 +18,38 @@ exports.handleLevel = (req, res) => {
   return res.redirect(`/play?level=${level}`);
 };
 
-exports.getQuestions = (req, res) => {
+exports.getQuestions = async (req, res) => {
   const level = req.query.level;
 
-  const data = JSON.parse(fs.readFileSync(filePath));
-
-  if (!data[level]) {
-    return res.status(400).json({ error: "Invalid level" });
+  try {
+    const questions = await Question.find({ level });
+    res.json(questions);
+  } catch (err) {
+    res.status(500).json({ error: "Server Error" });
   }
-
-  res.json(data[level]);
 };
 
-exports.saveResult = (req, res) => {
+exports.saveResult = async (req, res) => {
   const { level, score } = req.body;
   const user = req.session.user;
   if (!user) {
     return res.status(401).json({ error: "Not logged in" });
   }
 
-  const results = loadResults();
-
-  results.push({
-    name: user.name,
+  await Result.create({
+    user: user.name,
     level,
     score,
-    date: new Date(),
   });
 
-  saveResultsFile(results);
   res.json({ success: true });
-  console.log("SAVE RESULT — user session:", req.session.user);
 };
 
-exports.getResults = (req, res) => {
-  const results = loadResults().slice(-20).reverse();
+exports.getResults = async (req, res) => {
+  const results = await Result.find().sort({ date: -1 }).limit(20);
   res.render("pages/results", {
     results,
     pageTitle: "Leaderboards",
-    ...res.locals,
   });
 };
 

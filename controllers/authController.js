@@ -1,16 +1,4 @@
-const fs = require("fs");
-const path = require("path");
-
-const usersFile = path.join(__dirname, "../data/user.json");
-
-const loadUsers = () => {
-  if (!fs.existsSync(usersFile)) return [];
-  return JSON.parse(fs.readFileSync(usersFile, "utf8"));
-};
-
-const saveUsers = (users) => {
-  fs.writeFileSync(usersFile, JSON.stringify(users, null, 2));
-};
+const User = require("../models/user");
 
 exports.getSignup = (req, res) => {
   res.render("pages/signup", { pageTitle: "Register" });
@@ -19,7 +7,7 @@ exports.getLogin = (req, res) => {
   res.render("pages/login", { pageTitle: "Login" });
 };
 
-exports.handleSignup = (req, res) => {
+exports.handleSignup = async (req, res) => {
   const { name, email, password, confirmPassword } = req.body;
 
   if (!name || !email || !password || !confirmPassword) {
@@ -30,31 +18,24 @@ exports.handleSignup = (req, res) => {
     return res.redirect("/auth/signup?error=password_mismatch");
   }
 
-  let users = loadUsers();
+  const existing = await User.findOne({ email });
+  if (existing) return res.redirect("/auth/signup?error=user_exist");
 
-  if (users.find((u) => u.email === email)) {
-    return res.redirect("/auth/signup?error=exists");
-  }
-
-  users.push({ name, email, password });
-  saveUsers(users);
+  const newUser = new User({ name, email, password });
+  await newUser.save();
 
   req.session.user = { name, email };
-
-  return res.redirect("/");
+  res.redirect("/");
 };
 
-exports.handleLogin = (req, res) => {
+exports.handleLogin = async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
     return res.redirect("/auth/login?error=empty");
   }
 
-  const users = loadUsers();
-
-  const user = users.find((u) => u.email === email);
-
+  const user = await User.findOne({ email });
   if (!user) {
     return res.redirect("/auth/login?error=not_found");
   }
@@ -64,9 +45,7 @@ exports.handleLogin = (req, res) => {
   }
 
   req.session.user = { name: user.name, email: user.email };
-  req.session.save(() => {
-    res.redirect("/");
-  });
+  res.redirect("/");
 };
 
 exports.handleLogout = (req, res) => {
